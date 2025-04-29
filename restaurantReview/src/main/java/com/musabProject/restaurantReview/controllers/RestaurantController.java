@@ -51,4 +51,33 @@ public class RestaurantController {
 
         return searchResults.map(restaurantMapper::toSummaryDto);
     }
+
+    @GetMapping(path = "/{restaurant_id}")
+    public ResponseEntity<RestaurantDto> getRestaurant(@PathVariable("restaurant_id") String restaurantId){
+        return restaurantService.getRestaurant(restaurantId)
+                .map(restaurant -> ResponseEntity.ok(restaurantMapper.toRestaurantDto(restaurant)))
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+
+    @PutMapping(path = "/{restaurant_id}")
+    public ResponseEntity<RestaurantDto> updateRestaurant(
+            @PathVariable("restaurant_id") String restaurantId,
+            @Valid @RequestBody RestaurantCreateUpdateRequestDto requestDto)
+    {
+        RestaurantCreateUpdateRequest request = restaurantMapper
+                .toRestaurantCreateUpdateRequest(requestDto);
+
+        Restaurant updatedRestaurant = restaurantService.updateRestaurant(restaurantId, request);
+
+        return ResponseEntity.ok(restaurantMapper.toRestaurantDto(updatedRestaurant));
+    }
+
+
+    @DeleteMapping(path = "/{restaurant_id}")
+    public ResponseEntity<Void> deleteRestaurant(@PathVariable("restaurant_id") String restaurantId) {
+        restaurantService.deleteRestaurant(restaurantId);
+        return ResponseEntity.noContent().build();
+    }
+
 }

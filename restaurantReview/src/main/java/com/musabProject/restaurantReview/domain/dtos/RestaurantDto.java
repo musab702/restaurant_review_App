@@ -40,4 +40,6 @@ public class RestaurantDto {
 
     private UserDto createdBy;
 
+    private Integer totalReviews;
+
 }

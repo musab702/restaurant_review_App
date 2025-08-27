@@ -241,9 +241,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Radix UI** and **shadcn/ui** for UI components
 - **OpenStreetMap** for mapping services
 
-## 📞 Support
-
-For support, email [your-email@example.com] or create an issue in the repository.
 
 ---
 
